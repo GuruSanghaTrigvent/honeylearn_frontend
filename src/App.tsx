@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Index from "./pages/Index";
 import { trackPageView } from "./utils/analytics";
 import * as MetaPixel from "./utils/metaPixel";
+import { TestVoiceChat } from "./components/TestVoiceChat";
 
 const queryClient = new QueryClient();
 
@@ -30,23 +30,23 @@ const PageTracker = () => {
   useEffect(() => {
     // Get page title based on path
     const getPageTitle = (path: string) => {
-      if (path === '/') return 'Home';
-      if (path === '/index') return 'Index';
-      if (path === '/signup') return 'Sign Up';
-      if (path === '/login') return 'Login';
-      if (path === '/dashboard') return 'Dashboard';
-      if (path === '/parents') return 'Parent Dashboard';
-      if (path === '/terms') return 'Terms of Service';
-      if (path === '/privacy') return 'Privacy Policy';
-      if (path.includes('/topic/')) return 'Topic Detail';
-      if (path.includes('/lesson/')) return 'Lesson Detail';
-      return 'Page Not Found';
+      if (path === "/") return "Home";
+      if (path === "/index") return "Index";
+      if (path === "/signup") return "Sign Up";
+      if (path === "/login") return "Login";
+      if (path === "/dashboard") return "Dashboard";
+      if (path === "/parents") return "Parent Dashboard";
+      if (path === "/terms") return "Terms of Service";
+      if (path === "/privacy") return "Privacy Policy";
+      if (path.includes("/topic/")) return "Topic Detail";
+      if (path.includes("/lesson/")) return "Lesson Detail";
+      return "Page Not Found";
     };
 
     const pageTitle = getPageTitle(location.pathname);
     // Track with Google Analytics
     trackPageView(location.pathname, pageTitle);
-    
+
     // Track with Meta Pixel
     MetaPixel.trackPageView(location.pathname);
   }, [location]);
@@ -76,6 +76,8 @@ const App = () => {
                 <Route path="/parents" element={<ParentDashboard />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/test-voice-chat" element={<TestVoiceChat />} />
+                {/* Catch-all route for 404 */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
