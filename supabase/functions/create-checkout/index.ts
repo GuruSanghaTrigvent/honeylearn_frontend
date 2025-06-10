@@ -15,7 +15,7 @@ serve(async (req) => {
 
   try {
     console.log("Starting create-checkout function");
-    
+
     const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeSecretKey) {
       console.error("ERROR: STRIPE_SECRET_KEY is not set in environment variables");
